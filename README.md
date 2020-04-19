@@ -2,22 +2,30 @@
 Peer To Peer Media Exchange Through WEBRTC
 
 
-## Install dependencies
+### Install dependencies
+
+```bash
 npm install
+```
 
-## Run Server
+### Run Server
+
+```bash
 node app.js
+```
 
 
 
-## Access webpage 
+### Access webpage 
 Go to chrome browser\
 ip :8080
 
 
-### Note:
-This Project Contains simple demo only 2 peer can exchange data. \
-Further Enhancement coming soon.
 
 ## License
 [Apache License 2.0](https://github.com/vishalabhang/HostRTC/blob/master/LICENSE)
+
+
+## Note:
+This Project Contains simple demo only 2 peer can exchange data. \
+Further Enhancement coming soon.
