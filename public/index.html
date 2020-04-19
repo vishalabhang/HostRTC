@@ -1,0 +1,173 @@
+<html>
+
+<head>
+    <title>
+
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    
+    <script src="js/jquery-3.5.0.slim.min.js"
+    ></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    
+</head>
+<style>
+    
+    #local_video {
+        position: fixed;
+        right: 0;
+        bottom: 15%;
+        width: 30%;
+    }
+    #remote_video {
+        position: fixed;
+        left: 0%;
+        right: 0;
+        top: 0;
+        min-width: 100%;
+        min-height:70%;
+    }
+
+
+    .content {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.5);
+        color: #f1f1f1;
+        width: 100%;
+        padding: 20px;
+    }
+    .contentstatus{
+        position: fixed;
+        bottom: 20%;
+        right: 0;
+        background: rgba(0, 0, 0, 0.2);
+        color: #f1f1f1;
+        width: 25%;
+        height: 80%;
+        overflow-y: scroll;
+    }
+    .contentrtcstatus{
+        position: fixed;
+        bottom: 15%;
+        left: 0;
+        background: rgba(0, 0, 0, 0.2);
+        color: #f1f1f1;
+        width: 65%;
+        height: 20%;
+        overflow-y: scroll;
+    }
+    #myBtn {
+
+        font-size: 18px;
+        padding: 5px;
+        border: none;
+        background: #000;
+        color: #fff;
+        cursor: pointer;
+    }
+</style>
+
+<body>
+
+    <header>
+
+
+        <div class="Container">
+
+            <div class="row" >
+               
+                <div class="col-sm">
+                    <video autoplay loop id="remote_video" width="50" height="50">
+
+                    </video>
+                </div>
+            </div>
+        
+        
+        
+        
+        <div class="contentrtcstatus" >
+            
+        </div>
+    
+
+    <!--
+            <div class="contentstatus" >
+            
+            </div>
+        -->   
+        <div class="col-sm">
+            <video autoplay muted loop id="local_video">
+
+            </video>
+        </div>
+            <div class="content">
+            
+                <div id="newmeet" >
+                    <button id="myBtn" OnClick="NewMeeting()">New Meeting</button>
+                </div>
+                 <!-- <button id="myBtn" OnClick="JoinMeeting()">Meeting Code</button>   -->
+<br>
+             <div id="RTCConnect"  style="display: none;">
+                 <input type="text" id="msgid" value="hi" placeholder="Enter Message">
+                <button id="myBtn" OnClick="ViaRTC()">Send</button>
+                
+            </div>
+        </div>
+
+
+
+        <script src="js/RTCClient.js"></script>
+        <script>
+            
+            var SocketHost= window.location.href;
+            var video = document.getElementById("myVideo");
+            var btn = document.getElementById("myBtn");
+            var contentstatus = document.getElementById("contentstatus");
+            var socket = io.connect(SocketHost);
+
+socket.on('connect', () => {
+    console.log('Successfully connected!');
+    console.log(socket.id);
+
+});
+socket.on('open', function (event) {
+    console.log(event);
+    console.log("Connection Open");
+});
+
+socket.on('disconnect', function (event) {
+    console.log("Connection disconnect")
+});
+
+
+
+socket.on('CreateMeeting', function (CreateMeeting) {
+    console.log("Connection CreateMeeting", CreateMeeting)
+});
+socket.on('error', function (event) {
+    console.log("Connection event")
+});
+socket.on('SDPS', message => {
+    console.log(message);
+    //sendConfig(message);
+});
+socket.on('SDPR', message => {
+    console.log(message);
+    sendConfig(message);
+});
+
+      
+        </script>
+
+</body>
+
+</html>
