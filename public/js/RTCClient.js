@@ -177,7 +177,7 @@ function openDataChannel() {
     var dataChannelOptions = {
         reliable: true
     };
-    RTCPeerDataChannel = RTCPeer.createDataChannel("myDataChannel", dataChannelOptions);
+    RTCPeerDataChannel = RTCPeer.createDataChannel("myDataChannel");
     log("Data Channel Created");
     RTCPeerDataChannel.onerror = function (error) {
         console.log("Error:", error);
@@ -192,7 +192,27 @@ function openDataChannel() {
 
 function ViaRTC (){
     sengMessage=$("#msgid").val()
-    RTCPeerDataChannel.send(sengMessage);
+    //var dataChannel = peerConnection.createDataChannel("myDataChannel");
+var sendQueue = [];
+
+  switch(RTCPeerDataChannel.readyState) {
+    case "connecting":
+      console.log("Connection not open; queueing: " + msg);
+      sendQueue.push(msg);
+      break;
+    case "open":
+      sendQueue.forEach((msg) => RTCPeerDataChannel.send(msg));
+      break;
+    case "closing":
+      console.log("Attempted to send message while closing: " + msg);
+      break;
+    case "closed":
+      console.log("Error! Attempt to send while connection closed.");
+      break;
+  }
+
+
+    //RTCPeerDataChannel.send(sengMessage);
     logViaRTC(sengMessage,true)
 }
 
