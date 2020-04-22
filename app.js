@@ -1,9 +1,13 @@
 const express = require("express");
 const app = express();
-
+const fs = require('fs');
+const cert = fs.readFileSync('./cert.pem');
+const key = fs.readFileSync('./key.pem');
 app.use(express.static(__dirname + '/public/'))
+const https = require('https');
 
-const server = require('http').Server(app);
+//const server = require('http').Server(app);
+const server = https.createServer({key: key, cert: cert }, app);
 const io = require('socket.io')(server);
 
 server.listen(8080, () => {
@@ -11,6 +15,7 @@ server.listen(8080, () => {
 });
 /*
 
+//https://vishalabhang.github.io/HostRTC/
 //const socketio=require('socket.io')0
 const expressServer =app.listen(8080,()=>{
     console.log("Server Is Runnig on PORT 8080");

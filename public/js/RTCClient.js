@@ -1,10 +1,13 @@
-
+const PORT=3478
+const IP="3.6.177.153"
 var configuration = {
     iceServers: [{
-        urls: "stun:stun.services.mozilla.com",
-        username: "louis@mozilla.com",
-        credential: "webrtcdemo"
-    }, {
+        urls: `turn:${IP}:${PORT}?transport=tcp`,
+        username: 'vishalabhang',
+        credential: 'Host@127'
+      }]
+
+    /*iceServers: [{
         urls: [
             "stun:stun.l.google.com",
             "stun:stun2.l.google.com",
@@ -12,13 +15,13 @@ var configuration = {
             "stun:stun4.l.google.com",
 
         ]
-    }]
+    }]*/
 };
-var RTCPeer = new RTCPeerConnection(configuration, {
-    optional: [{ RtpDataChannels: true }]
-})
+var RTCPeer = new RTCPeerConnection(configuration,{
+    optional  : [{ RtpDataChannels: true }]
+});
 var navigator =Navigator;
-var RTCPeerDataChannel=[]
+var RTCPeerDataChannel={};
 log("RTCPeer Object Created");
 
 RTCPeer.onicecandidate = function (event) {
@@ -177,7 +180,7 @@ function openDataChannel() {
     var dataChannelOptions = {
         reliable: true
     };
-    RTCPeerDataChannel = RTCPeer.createDataChannel("myDataChannel");
+    RTCPeerDataChannel = RTCPeer.createDataChannel("myDataChannel",dataChannelOptions);
     log("Data Channel Created");
     RTCPeerDataChannel.onerror = function (error) {
         console.log("Error:", error);
@@ -188,23 +191,25 @@ function openDataChannel() {
     };
 
 }
-
+var sendQueue = [];
 
 function ViaRTC (){
     sengMessage=$("#msgid").val()
     //var dataChannel = peerConnection.createDataChannel("myDataChannel");
-var sendQueue = [];
+
 
   switch(RTCPeerDataChannel.readyState) {
     case "connecting":
-      console.log("Connection not open; queueing: " + msg);
-      sendQueue.push(msg);
+      console.log("Connection not open; queueing: " + mssengMessageg);
+      sendQueue.push(sengMessage);
       break;
     case "open":
+      console.log("Connection is Open");
+      sendQueue.push(sengMessage);
       sendQueue.forEach((msg) => RTCPeerDataChannel.send(msg));
       break;
     case "closing":
-      console.log("Attempted to send message while closing: " + msg);
+      console.log("Attempted to send message while closing: " + sengMessage);
       break;
     case "closed":
       console.log("Error! Attempt to send while connection closed.");
@@ -239,6 +244,7 @@ function JoinMeeting() {
 
 function log(msg){
     $('.contentstatus').append(" <div class='alert alert-primary'>"+msg+"</div>");
+    $('.contentstatus').scrollTop($('.contentstatus')[0].scrollHeight+100);
     console.log(msg)
 }
 
