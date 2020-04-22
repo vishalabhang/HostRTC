@@ -14,7 +14,7 @@
     <script src="js/bootstrap.min.js"></script>
 
 
-    <script src="/js/socket.io.js"></script>
+    <script type='text/javascript' src='http://3.6.177.153:8080/socket.io/socket.io.js'></script>
     
 </head>
 <style>
@@ -128,11 +128,12 @@
         <script src="js/RTCClient.js"></script>
         <script>
             
-            var SocketHost= "3.6.177.153:8080";
+            var SocketHost= ":8080";
             var video = document.getElementById("myVideo");
             var btn = document.getElementById("myBtn");
             var contentstatus = document.getElementById("contentstatus");
-            var socket = io.connect(SocketHost);
+            var socket = io.connect("http://3.6.177.153:8080");
+            //var socket = io.connect(SocketHost);
 
 socket.on('connect', () => {
     console.log('Successfully connected!');
