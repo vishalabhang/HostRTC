@@ -6,8 +6,8 @@ const key = fs.readFileSync('./key.pem');
 app.use(express.static(__dirname + '/public/'))
 const https = require('https');
 
-//const server = require('http').Server(app);
-const server = https.createServer({key: key, cert: cert }, app);
+const server = require('http').Server(app);
+//const server = https.createServer({key: key, cert: cert }, app);
 const io = require('socket.io')(server);
 
 server.listen(8080, () => {
