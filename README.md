@@ -94,7 +94,7 @@ USERNAME="some-username"
 PASSWORD="some-password"
 PORT=3478
 
-# -n: use only commandline parameters, no config file
+ 
 sudo turnserver \
     -n \
     --verbose \
@@ -104,7 +104,7 @@ sudo turnserver \
     --no-dtls \
     --no-tls \
     --listening-port $PORT
-=======
+======================================
 This project contains simple demo only 2 peer can exchange data through WEBRTC. \
 Further ehancement coming soon.....
->>>>>>> e61645692139bda29e3297355ed19cb8a1389aa9
+
