@@ -86,10 +86,6 @@ This Project Contains simple demo only 2 peer can exchange data. \
 Further Enhancement coming soon.
 
 
-## https://stackoverflow.com/questions/25546098/installing-a-turn-server-on-ubuntu-for-webrt
-
-
-
 ======================================
 This project contains simple demo only 2 peer can exchange data through WEBRTC. \
 Further ehancement coming soon.....
