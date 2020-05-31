@@ -94,16 +94,10 @@ USERNAME="some-username"
 PASSWORD="some-password"
 PORT=3478
 
- 
-sudo turnserver \
-    -n \
-    --verbose \
-    --lt-cred-mech \
-    --user $USERNAME:$PASSWORD \
-    --realm "someRealm" \
-    --no-dtls \
-    --no-tls \
-    --listening-port $PORT
+
+
+
+
 ======================================
 This project contains simple demo only 2 peer can exchange data through WEBRTC. \
 Further ehancement coming soon.....
