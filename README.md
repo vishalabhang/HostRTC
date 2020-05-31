@@ -81,20 +81,12 @@ https://stackoverflow.com/questions/25546098/installing-a-turn-server-on-ubuntu-
 
 
 ## Note:
-<<<<<<< HEAD
+
 This Project Contains simple demo only 2 peer can exchange data. \
 Further Enhancement coming soon.
 
 
-## https://stackoverflow.com/questions/25546098/installing-a-turn-server-on-ubuntu-for-webrtc
-
-
-# configure & run
-USERNAME="some-username"
-PASSWORD="some-password"
-PORT=3478
-
-
+## https://stackoverflow.com/questions/25546098/installing-a-turn-server-on-ubuntu-for-webrt
 
 
 
